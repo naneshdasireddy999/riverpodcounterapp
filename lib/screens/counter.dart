@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpodcounterapp/main.dart';
+
+import 'package:riverpodcounterapp/rdata.dart';
 
 class Counter extends ConsumerWidget {
   const Counter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final int counter = ref.watch(counterprovider);
-    ref.listen<int>(counterprovider, (previous, next) {
+    final int counter = ref.watch(Rdata.counterprovider);
+    ref.listen<int>(Rdata.counterprovider, (previous, next) {
       if (next >= 5) {
         showDialog(
             context: context,
@@ -31,7 +32,7 @@ class Counter extends ConsumerWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(counterprovider.notifier).state++;
+          Rdata.increment(ref);
         },
         child: const Icon(Icons.add),
       ),
@@ -39,7 +40,7 @@ class Counter extends ConsumerWidget {
         actions: [
           IconButton(
               onPressed: () {
-                ref.refresh(counterprovider);
+                Rdata.reset(ref);
               },
               icon: const Icon(Icons.refresh))
         ],

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:riverpodcounterapp/screens/home.dart';
 
-final counterprovider = StateProvider((ref) => 0);
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
